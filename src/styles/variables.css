@@ -1,0 +1,9 @@
+:root {
+  --white-50: #fefefe;
+  --white-500: #f8f8f8;
+  --grey-900: #151515;
+
+  /* shadow */
+  --body-cart-shadow: 0px 2px 24px rgba(15, 23, 42, 0.02);
+  --sidebar-shadow: 0px 2px 24px rgba(15, 23, 42, 0.02);
+}
