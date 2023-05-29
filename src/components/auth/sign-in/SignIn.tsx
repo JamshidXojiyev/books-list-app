@@ -1,5 +1,11 @@
 import { FC } from "react";
-import { AuthTitle, FormBlock, SocialBlock } from "../auth.s";
+import {
+  AuthBottom,
+  AuthLink,
+  AuthTitle,
+  FormBlock,
+  SocialBlock,
+} from "../auth.s";
 import { SocialButton } from "../components";
 import TextField from "@mui/material/TextField";
 import { useFormik } from "formik";
@@ -7,20 +13,7 @@ import * as Yup from "yup";
 import { CustomButton } from "../../../styles/custom-styles";
 import { SignInWrap } from "./sign-in.s";
 
-interface ISignInProps {}
-
 const signInSchema = Yup.object().shape({
-  name: Yup.string().required("Full name is required"),
-  email: Yup.string()
-    .required("Email is required")
-    .email("Email must be a valid email")
-    .test(
-      "checkEmail",
-      "In email, you can use Latin letters, numbers, and the _ symbol",
-      (e: string) => {
-        return /^[a-zA-Z0-9@._-]+$/.test(e);
-      }
-    ),
   key: Yup.string()
     .required("Username is required")
     .min(6, "Minimum length 6 characters")
@@ -37,11 +30,9 @@ const signInSchema = Yup.object().shape({
     .matches(/^(?=.*[!@#\$%\^&\*])/, "Must Contain One Special Case Character"),
 });
 
-export const SignIn: FC<ISignInProps> = (props) => {
+export const SignIn: FC = (props) => {
   const formik = useFormik({
     initialValues: {
-      name: "",
-      email: "",
       key: "",
       secret: "",
     },
@@ -53,7 +44,7 @@ export const SignIn: FC<ISignInProps> = (props) => {
 
   return (
     <SignInWrap>
-      <AuthTitle>Sign up</AuthTitle>
+      <AuthTitle>Sign in</AuthTitle>
       <SocialBlock>
         <SocialButton click={() => console.log("hello")}>
           Continue with Google
@@ -69,38 +60,10 @@ export const SignIn: FC<ISignInProps> = (props) => {
           margin="normal"
           required
           fullWidth
-          label="Enter your full name"
-          name="name"
-          autoComplete="name"
-          autoFocus
-          onChange={formik.handleChange}
-          value={formik.values.name}
-          error={formik.touched.name && !!formik.errors.name}
-          helperText={formik.touched.name ? formik.errors.name : ""}
-          onBlur={formik.handleBlur}
-        />
-        <TextField
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          label="Enter your email"
-          name="email"
-          autoComplete="email"
-          onChange={formik.handleChange}
-          value={formik.values.email}
-          error={formik.touched.email && !!formik.errors.email}
-          helperText={formik.touched.email ? formik.errors.email : ""}
-          onBlur={formik.handleBlur}
-        />
-        <TextField
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          label="Enter your username"
+          label="Username*"
           name="key"
           autoComplete="key"
+          autoFocus
           onChange={formik.handleChange}
           value={formik.values.key}
           error={formik.touched.key && !!formik.errors.key}
@@ -112,7 +75,7 @@ export const SignIn: FC<ISignInProps> = (props) => {
           margin="normal"
           required
           fullWidth
-          label="Enter your password"
+          label="Password*"
           name="secret"
           type="secret"
           autoComplete="secret"
@@ -122,15 +85,21 @@ export const SignIn: FC<ISignInProps> = (props) => {
           helperText={formik.touched.secret ? formik.errors.secret : ""}
           onBlur={formik.handleBlur}
         />
-        <CustomButton
-          type="submit"
-          color="primary"
-          variant="contained"
-          disabled={!formik.dirty}
-          fullWidth
-        >
-          Login
-        </CustomButton>
+
+        <AuthBottom>
+          <CustomButton
+            type="submit"
+            color="primary"
+            variant="contained"
+            disabled={!formik.dirty}
+            fullWidth
+          >
+            Login
+          </CustomButton>
+          <AuthLink to="/sign-up">
+            Not registered yet? <span>Go to Sign up.</span>
+          </AuthLink>
+        </AuthBottom>
       </FormBlock>
     </SignInWrap>
   );

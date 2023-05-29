@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const AuthWrapper = styled.div`
@@ -40,4 +41,27 @@ export const SocialBlock = styled.div`
   gap: 16px;
 
   width: 100%;
+`;
+
+export const AuthBottom = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+
+  margin-top: 20px;
+`;
+export const AuthLink = styled(Link)`
+  && {
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 120%;
+    text-align: center;
+    color: var(--grey-500);
+    span {
+      color: var(--purple-500);
+    }
+  }
 `;

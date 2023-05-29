@@ -1,4 +1,4 @@
-import { Dashboard, SignIn, SignUp } from "../components";
+import { Home, SignIn, SignUp } from "../components";
 import { RouteLinkProps } from "../interfaces/global-interface";
 
 const routeLinks: RouteLinkProps[] = [
@@ -12,7 +12,7 @@ const routeLinks: RouteLinkProps[] = [
   },
   {
     path: "/",
-    component: Dashboard,
+    component: Home,
     isPrivate: true,
   },
 ];

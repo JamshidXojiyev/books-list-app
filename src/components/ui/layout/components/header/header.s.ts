@@ -1,15 +1,17 @@
 import styled from "styled-components";
 
 export const HeaderWrap = styled.header`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
+  && {
+    & > div {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
 
-  padding: 12px 0;
-
-  background: #333333;
+      padding: 12px 0;
+    }
+  }
 `;
 
 export const HeaderLeft = styled.div`

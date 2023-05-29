@@ -1,5 +1,11 @@
-export interface signInInterface {
+export interface ISignUp {
   name: string;
   email: string;
-  password: string;
+  key: string;
+  secret: string;
+}
+
+export interface ISignIn {
+  key: string;
+  sign: string;
 }

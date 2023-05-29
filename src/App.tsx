@@ -1,7 +1,8 @@
 import { BrowserRouter } from "react-router-dom";
 import { Router } from "./routes";
-
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { Provider } from "react-redux";
+import { store } from "./app/store";
 
 const theme = createTheme({
   palette: {
@@ -25,7 +26,9 @@ function App() {
     <>
       <ThemeProvider theme={theme}>
         <BrowserRouter>
-          <Router />
+          <Provider store={store}>
+            <Router />
+          </Provider>
         </BrowserRouter>
       </ThemeProvider>
     </>
