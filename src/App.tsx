@@ -1,8 +1,8 @@
-import { BrowserRouter } from "react-router-dom";
 import { Router } from "./routes";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Provider } from "react-redux";
-import { store } from "./app/store";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useUserInfo } from "./hooks/useUserInfo";
 
 const theme = createTheme({
   palette: {
@@ -22,15 +22,25 @@ const theme = createTheme({
 });
 
 function App() {
+  const auth = useUserInfo();
   return (
     <>
       <ThemeProvider theme={theme}>
-        <BrowserRouter>
-          <Provider store={store}>
-            <Router />
-          </Provider>
-        </BrowserRouter>
+        <Router />
       </ThemeProvider>
+      {/* toast message global component */}
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </>
   );
 }

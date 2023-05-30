@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { ISignIn, ISignUp } from "../interfaces/auth-interface";
+import { userInfo, ISignUp } from "../interfaces/auth-interface";
 
 export const authApi = createApi({
   reducerPath: "authApi",
@@ -11,16 +11,16 @@ export const authApi = createApi({
       query: (body: ISignUp) => {
         return {
           url: "signup",
-          method: "post",
+          method: "POST",
           body,
         };
       },
     }),
-    signInUser: builder.mutation({
-      query: (headers: ISignIn) => {
+    userInfo: builder.mutation({
+      query: (headers: userInfo) => {
         return {
           url: "myself",
-          method: "get",
+          method: "GET",
           headers: {
             Key: headers.key,
             Sign: headers.sign,
@@ -31,4 +31,4 @@ export const authApi = createApi({
   }),
 });
 
-export const { useSignUpUserMutation } = authApi;
+export const { useSignUpUserMutation, useUserInfoMutation } = authApi;

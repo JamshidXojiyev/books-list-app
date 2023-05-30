@@ -37,9 +37,7 @@ export const SignIn: FC = (props) => {
       secret: "",
     },
     validationSchema: signInSchema,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-    },
+    onSubmit: (values) => {},
   });
 
   return (

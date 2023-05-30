@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { SignUpWrap } from "./sign-up.s";
 import {
   AuthBottom,
@@ -13,6 +13,10 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { CustomButton } from "../../../styles/custom-styles";
 import { useSignUpUserMutation } from "../../../services/authApi";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { setUser } from "../../../features/authSlice";
+import { toast } from "react-toastify";
 
 const signUpSchema = Yup.object().shape({
   name: Yup.string().required("Full name is required"),
@@ -43,8 +47,9 @@ const signUpSchema = Yup.object().shape({
 });
 
 export const SignUp: FC = (props) => {
-  const [signUpUser, { data, isSuccess, isError, error, isLoading }] =
-    useSignUpUserMutation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [signUpUser, { isLoading, data, error }] = useSignUpUserMutation();
 
   const formik = useFormik({
     initialValues: {
@@ -54,8 +59,18 @@ export const SignUp: FC = (props) => {
       secret: "",
     },
     validationSchema: signUpSchema,
-    onSubmit: async (values) => {
-      signUpUser(values);
+    onSubmit: (values) => {
+      signUpUser(values)
+        .then(() => {
+          dispatch(setUser({ ...data.data }));
+          navigate("/");
+          toast.success("Good day, the system is ready to work!");
+        })
+        .catch((err) => {
+          console.log(err.message);
+
+          toast.error("User with this key already exists!");
+        });
     },
   });
 

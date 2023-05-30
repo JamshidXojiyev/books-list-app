@@ -20,7 +20,7 @@ export const CustomButton = styled(Button)`
       width: 16px;
       height: 16px;
       path {
-        stroke-width: 1.6px;
+        strokeWidth: 1.6px;
       }
     }
   }

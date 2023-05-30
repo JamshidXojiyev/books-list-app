@@ -5,7 +5,15 @@ export interface ISignUp {
   secret: string;
 }
 
-export interface ISignIn {
+export interface userInfo {
   key: string;
   sign: string;
+}
+
+export interface AuthSate {
+  id: number;
+  name: string;
+  email: string;
+  key: string;
+  secret: string;
 }
