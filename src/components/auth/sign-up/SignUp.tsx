@@ -46,7 +46,7 @@ const signUpSchema = Yup.object().shape({
     .matches(/^(?=.*[!@#\$%\^&\*])/, "Must Contain One Special Case Character"),
 });
 
-export const SignUp: FC = (props) => {
+export const SignUp: FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [signUpUser, { isLoading, data, error }] = useSignUpUserMutation();
@@ -59,18 +59,16 @@ export const SignUp: FC = (props) => {
       secret: "",
     },
     validationSchema: signUpSchema,
-    onSubmit: (values) => {
-      signUpUser(values)
-        .then(() => {
-          dispatch(setUser({ ...data.data }));
-          navigate("/");
-          toast.success("Good day, the system is ready to work!");
-        })
-        .catch((err) => {
-          console.log(err.message);
+    onSubmit: async (values) => {
+      const resData: any = await signUpUser(values);
 
-          toast.error("User with this key already exists!");
-        });
+      if (resData?.data?.isOk) {
+        await dispatch(setUser({ ...resData.data.data }));
+        navigate("/");
+        toast.success("Good day, the system is ready to work!");
+      } else {
+        toast.error(resData.error.data.message);
+      }
     },
   });
 

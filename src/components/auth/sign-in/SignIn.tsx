@@ -30,7 +30,7 @@ const signInSchema = Yup.object().shape({
     .matches(/^(?=.*[!@#\$%\^&\*])/, "Must Contain One Special Case Character"),
 });
 
-export const SignIn: FC = (props) => {
+export const SignIn: FC = () => {
   const formik = useFormik({
     initialValues: {
       key: "",

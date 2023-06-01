@@ -1,27 +1,30 @@
-import { FC, useState } from "react";
+import { ChangeEvent, FC, useState, useEffect } from "react";
 import { BooksListWrap } from "./books-list.s";
-import { BooksItem } from "./BooksItem";
-import { IBooksList } from "../../../../interfaces/books-list-interface";
+import { BookItem } from "./BookItem";
+import { BookSkeleton } from "./BookSkeleton";
+import { useGetBooksQuery } from "../../../../services/booksApi";
 
-interface IBooksListProps {}
-
-export const BooksList: FC<IBooksListProps> = (props) => {
-  const [booksList, setBooksList] = useState<IBooksList[]>([]);
+export const BooksList: FC = () => {
+  const { data: booksList, isLoading } = useGetBooksQuery({});
 
   return (
-    <BooksListWrap>
-      {booksList.map((book) => (
-        <BooksItem
-          id={book.id}
-          isbn={book.isbn}
-          title={book.title}
-          cover={book.cover}
-          author={book.author}
-          published={book.published}
-          pages={book.pages}
-          description={book.description}
-        />
-      ))}
-    </BooksListWrap>
+    <>
+      <BooksListWrap>
+        {isLoading
+          ? "hello".split("").map((item, index) => <BookSkeleton key={index} />)
+          : booksList?.data?.map((item: any, index: number) => (
+              <BookItem
+                key={index}
+                id={item.book?.id}
+                isbn={item.book?.isbn}
+                title={item.book?.title}
+                cover={item.book?.cover}
+                author={item.book?.author}
+                published={item.book?.published}
+                pages={item.book?.pages}
+              />
+            ))}
+      </BooksListWrap>
+    </>
   );
 };

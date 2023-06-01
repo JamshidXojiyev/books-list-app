@@ -7,8 +7,9 @@ interface Props {
 export type ComponentProps = FC<Props>;
 
 export interface RouteLinkProps {
-  path: string;
+  path?: string;
   component: FC<any>;
+  index?: boolean;
   isPrivate?: boolean;
   children?: RouteLinkProps[];
 }

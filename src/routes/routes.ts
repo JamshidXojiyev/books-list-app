@@ -11,8 +11,8 @@ const routeLinks: RouteLinkProps[] = [
     component: SignIn,
   },
   {
-    path: "/",
     component: Home,
+    index: true,
     isPrivate: true,
   },
 ];

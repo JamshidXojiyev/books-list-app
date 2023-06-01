@@ -4,21 +4,27 @@ export const BooksListWrap = styled.div`
   && {
     width: 100%;
 
+    -moz-column-count: 3;
+    -webkit-column-count: 3;
     column-count: 3;
+    -moz-column-gap: 10px;
+    -webkit-column-gap: 10px;
     column-gap: 24px;
-    direction: ltr;
   }
 `;
 
 // books item styles
+export const BooksItemEffectWrap = styled.div`
+  width: 100%;
+  margin-bottom: 24px;
+  display: inline-block;
+`;
 export const BooksItemWrap = styled.div`
   && {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 16px;
-
-    margin-bottom: 24px;
 
     padding: 32px;
     background: var(--white-50);
@@ -45,6 +51,8 @@ export const BooksItemTop = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 6px;
+
+  width: 100%;
 `;
 export const BooksItemBottom = styled.div`
   display: flex;
@@ -52,6 +60,8 @@ export const BooksItemBottom = styled.div`
   justify-content: space-between;
   align-items: center;
   gap: 16px;
+
+  width: 100%;
 `;
 export const BooksAuthor = styled.p`
   font-weight: 500;

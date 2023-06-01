@@ -1,8 +1,8 @@
+import { useEffect } from "react";
 import { Router } from "./routes";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useUserInfo } from "./hooks/useUserInfo";
 
 const theme = createTheme({
   palette: {
@@ -22,12 +22,12 @@ const theme = createTheme({
 });
 
 function App() {
-  const auth = useUserInfo();
   return (
     <>
       <ThemeProvider theme={theme}>
         <Router />
       </ThemeProvider>
+
       {/* toast message global component */}
       <ToastContainer
         position="top-right"

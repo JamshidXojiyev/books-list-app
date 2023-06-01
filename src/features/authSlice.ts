@@ -2,12 +2,16 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../app/store";
 import { AuthSate } from "../interfaces/auth-interface";
 
+const localStorUserInfo: AuthSate = JSON.parse(
+  localStorage.getItem("user-info") || "{}"
+);
+
 const initialState: AuthSate = {
-  id: 0,
-  name: "",
-  email: "",
-  key: "",
-  secret: "",
+  id: localStorUserInfo ? localStorUserInfo.id : 0,
+  name: localStorUserInfo ? localStorUserInfo.name : "",
+  email: localStorUserInfo ? localStorUserInfo.email : "",
+  key: localStorUserInfo ? localStorUserInfo.key : "",
+  secret: localStorUserInfo ? localStorUserInfo.secret : "",
 };
 
 export const authSlice = createSlice({

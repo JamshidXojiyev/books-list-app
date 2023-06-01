@@ -11,9 +11,9 @@ export interface userInfo {
 }
 
 export interface AuthSate {
-  id: number;
-  name: string;
-  email: string;
-  key: string;
-  secret: string;
+  id?: number;
+  name?: string;
+  email?: string;
+  key?: string;
+  secret?: string;
 }
