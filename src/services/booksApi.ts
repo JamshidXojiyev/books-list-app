@@ -6,11 +6,6 @@ import { IBookInfo } from "../interfaces/books-list-interface";
 const localStorUserInfo: AuthSate = JSON.parse(
   localStorage.getItem("user-info") || "{}"
 );
-const sign: string = Md5.hashStr(`GET/books${localStorUserInfo.secret}`);
-const header = {
-  Key: localStorUserInfo.key,
-  Sign: sign,
-};
 
 type TBookItem = {
   book?: IBookInfo | null;
@@ -34,7 +29,10 @@ export const booksApi = api.injectEndpoints({
         return {
           url: "books",
           method: "GET",
-          headers: header,
+          headers: {
+            Key: localStorUserInfo.key,
+            Sign: Md5.hashStr(`GET/books${localStorUserInfo.secret}`),
+          },
         };
       },
       providesTags: ["Books"],
@@ -45,19 +43,25 @@ export const booksApi = api.injectEndpoints({
           url: `books`,
           method: "POST",
           body: body,
-          headers: header,
+          headers: {
+            Key: localStorUserInfo.key,
+            Sign: Md5.hashStr(
+              `POST/books${JSON.stringify(body)}${localStorUserInfo.secret}`
+            ),
+          },
         };
       },
       invalidatesTags: ["Books"],
     }),
     searchBooks: build.mutation<TSearchResponse, string>({
       query(search) {
-        console.log("search: ", search);
-
         return {
           url: `books${search.length > 0 ? `/${search}` : ""}`,
           method: "GET",
-          headers: header,
+          headers: {
+            Key: localStorUserInfo.key,
+            Sign: Md5.hashStr(`GET/books/${search}${localStorUserInfo.secret}`),
+          },
         };
       },
       invalidatesTags: () => [{ type: "Books", id: "LIST" }],
@@ -68,7 +72,14 @@ export const booksApi = api.injectEndpoints({
           url: `books/${id}`,
           method: "POST",
           body: { body },
-          headers: header,
+          headers: {
+            Key: localStorUserInfo.key,
+            Sign: Md5.hashStr(
+              `POST/books/${id}${JSON.stringify(body)}${
+                localStorUserInfo.secret
+              }`
+            ),
+          },
         };
       },
       invalidatesTags: ["Books"],
@@ -78,7 +89,10 @@ export const booksApi = api.injectEndpoints({
         return {
           url: `books/${id}`,
           method: "DELETE",
-          headers: header,
+          headers: {
+            Key: localStorUserInfo.key,
+            Sign: Md5.hashStr(`POST/books/${id}${localStorUserInfo.secret}`),
+          },
         };
       },
       invalidatesTags: ["Books"],
