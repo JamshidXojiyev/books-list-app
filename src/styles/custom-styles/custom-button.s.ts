@@ -14,7 +14,7 @@ export const CustomButton = styled(Button)`
 
     font-weight: 500 !important;
     font-size: 16px !important;
-    color: var(--white-50) !important;
+    /* color: var(--white-50) !important; */
 
     svg {
       width: 16px;

@@ -39,12 +39,12 @@ export const booksApi = api.injectEndpoints({
       },
       providesTags: ["Books"],
     }),
-    createBooks: build.mutation<TResponse, string>({
+    createBooks: build.mutation<TResponse, { isbn: string }>({
       query(body) {
         return {
           url: `books`,
           method: "POST",
-          body: { body },
+          body: body,
           headers: header,
         };
       },
