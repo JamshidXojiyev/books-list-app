@@ -5,7 +5,7 @@ import { BookSkeleton } from "./BookSkeleton";
 import { useGetBooksQuery } from "../../../../services/booksApi";
 
 export const BooksList: FC = () => {
-  const { data: booksList, isLoading } = useGetBooksQuery({});
+  const { data: booksList, isLoading } = useGetBooksQuery();
 
   return (
     <>

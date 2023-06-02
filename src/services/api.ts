@@ -1,15 +1,16 @@
 import { createApi, fetchBaseQuery, retry } from "@reduxjs/toolkit/query/react";
-import { RootState } from "../app/store";
+// import { RootState } from "../app/store";
 
 // Create our baseQuery instance
 const baseQuery = fetchBaseQuery({
   baseUrl: "https://no23.lavina.tech/",
   prepareHeaders: (headers, { getState }) => {
     // By default, if we have a token in the store, let's use that for authenticated requests
-    const key = (getState() as RootState).auth.key;
-    if (key) {
-      headers.set("Key", key);
-    }
+
+    // const key = (getState() as RootState).auth.key;
+    // if (key) {
+    //   headers.set("Key", key);
+    // }
     return headers;
   },
 });
@@ -39,7 +40,7 @@ export const api = createApi({
    * Tag types must be defined in the original API definition
    * for any tags that would be provided by injected endpoints
    */
-  tagTypes: ["Time", "Posts", "Counter"],
+  tagTypes: ["Books"],
   /**
    * This api has endpoints injected in adjacent files,
    * which is why no endpoints are shown below.

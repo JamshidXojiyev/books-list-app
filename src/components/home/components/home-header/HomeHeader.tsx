@@ -7,10 +7,13 @@ import {
 } from "./home-header.s";
 import { CustomButton } from "../../../../styles/custom-styles";
 import { PlusIcon } from "../../../../assets/icons";
+import { useCreateBooksMutation } from "../../../../services/booksApi";
 
 interface IHomeHeaderProps {}
 
 export const HomeHeader: FC<IHomeHeaderProps> = (props) => {
+  const [createBooks, {}] = useCreateBooksMutation();
+
   return (
     <HomeHeaderWrap>
       <HeaderTopBlock>

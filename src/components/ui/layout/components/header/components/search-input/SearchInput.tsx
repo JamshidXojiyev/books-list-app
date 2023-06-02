@@ -2,15 +2,18 @@ import { FC, useState, useEffect } from "react";
 import { SearchInputComponent, SearchInputWrap } from "./search-input.s";
 import { SearchRefractionIcon } from "../../../../../../../assets";
 import { useDebounce } from "../../../../../../../hooks/useDebounce";
+import { useSearchBooksMutation } from "../../../../../../../services/booksApi";
 
 interface ISearchInputProps {}
 
 export const SearchInput: FC<ISearchInputProps> = (props) => {
   const [serach, setSearch] = useState<string>("");
-  const debounced = useDebounce(serach);
+  const debounced: string = useDebounce(serach);
+
+  const [searchBook] = useSearchBooksMutation();
 
   useEffect(() => {
-    console.log("debounced: ", debounced);
+    searchBook(debounced);
   }, [debounced]);
 
   return (
