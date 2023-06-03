@@ -13,7 +13,7 @@ export const SearchInput: FC<ISearchInputProps> = (props) => {
   const [searchBook] = useSearchBooksMutation();
 
   useEffect(() => {
-    searchBook(debounced);
+    debounced.length > 3 && searchBook(debounced);
   }, [debounced]);
 
   return (

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const BooksListWrap = styled.div`
   && {
@@ -15,9 +15,51 @@ export const BooksListWrap = styled.div`
 
 // books item styles
 export const BooksItemEffectWrap = styled.div`
-  width: 100%;
-  margin-bottom: 24px;
-  display: inline-block;
+  && {
+    width: 100%;
+    margin-bottom: 24px;
+    display: inline-block;
+    position: relative;
+
+    &:hover button {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+`;
+export const BookItemBtnBlock = styled.div`
+  position: absolute;
+  top: 16px;
+  right: 0;
+  transform: translateX(100%);
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+`;
+export const BookItemBtn = styled.button<{ action?: string }>`
+  && {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+
+    opacity: 0;
+    transform: translateX(-6px);
+    ${({ action }) =>
+      action === "delete"
+        ? css`
+            background: var(--orange-500);
+            border-radius: 6px 6px 6px 0px;
+          `
+        : css`
+            background: var(--purple-500);
+            border-radius: 0px 6px 6px 6px;
+            transition-duration: 250ms;
+          `}
+  }
 `;
 export const BooksItemWrap = styled.div`
   && {

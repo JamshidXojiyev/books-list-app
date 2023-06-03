@@ -6,4 +6,6 @@ export interface IBookInfo {
   author?: string;
   published?: number;
   pages?: number;
+  onEdit?: () => void;
+  onDelete?: () => void;
 }

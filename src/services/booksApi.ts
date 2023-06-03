@@ -53,19 +53,6 @@ export const booksApi = api.injectEndpoints({
       },
       invalidatesTags: ["Books"],
     }),
-    searchBooks: build.mutation<TSearchResponse, string>({
-      query(search) {
-        return {
-          url: `books${search.length > 0 ? `/${search}` : ""}`,
-          method: "GET",
-          headers: {
-            Key: localStorUserInfo.key,
-            Sign: Md5.hashStr(`GET/books/${search}${localStorUserInfo.secret}`),
-          },
-        };
-      },
-      invalidatesTags: () => [{ type: "Books", id: "LIST" }],
-    }),
     editBooks: build.mutation<TResponse, { id: number; body: object }>({
       query({ id, body }) {
         return {
@@ -91,11 +78,24 @@ export const booksApi = api.injectEndpoints({
           method: "DELETE",
           headers: {
             Key: localStorUserInfo.key,
-            Sign: Md5.hashStr(`POST/books/${id}${localStorUserInfo.secret}`),
+            Sign: Md5.hashStr(`DELETE/books/${id}${localStorUserInfo.secret}`),
           },
         };
       },
       invalidatesTags: ["Books"],
+    }),
+    searchBooks: build.mutation<TSearchResponse, string>({
+      query(search) {
+        return {
+          url: `books${search.length > 0 ? `/${search}` : ""}`,
+          method: "GET",
+          headers: {
+            Key: localStorUserInfo.key,
+            Sign: Md5.hashStr(`GET/books/${search}${localStorUserInfo.secret}`),
+          },
+        };
+      },
+      invalidatesTags: () => ["Books"],
     }),
   }),
 });

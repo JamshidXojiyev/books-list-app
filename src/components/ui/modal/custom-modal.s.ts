@@ -54,7 +54,7 @@ export const ModalCloseBtn = styled.button`
       height: 24px;
       path {
         stroke: var(--grey-900);
-        stroke-width: 1.6px;
+        strokeWidth: 1.6px;
       }
     }
   }

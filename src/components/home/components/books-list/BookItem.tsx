@@ -1,5 +1,7 @@
 import { FC } from "react";
 import {
+  BookItemBtn,
+  BookItemBtnBlock,
   BooksAuthor,
   BooksDescription,
   BooksItemBottom,
@@ -10,6 +12,7 @@ import {
   BooksTitle,
 } from "./books-list.s";
 import { IBookInfo } from "../../../../interfaces/books-list-interface";
+import { Edit04Icon, Trash01Icon } from "../../../../assets/icons";
 
 export const BookItem: FC<IBookInfo> = ({
   id,
@@ -19,6 +22,8 @@ export const BookItem: FC<IBookInfo> = ({
   author,
   published,
   pages,
+  onEdit,
+  onDelete,
 }) => {
   return (
     <BooksItemEffectWrap>
@@ -38,6 +43,14 @@ export const BookItem: FC<IBookInfo> = ({
           <BooksPages>{pages} pages</BooksPages>
         </BooksItemBottom>
       </BooksItemWrap>
+      <BookItemBtnBlock>
+        <BookItemBtn action="delete" onClick={onDelete}>
+          <Trash01Icon />
+        </BookItemBtn>
+        <BookItemBtn onClick={onEdit}>
+          <Edit04Icon />
+        </BookItemBtn>
+      </BookItemBtnBlock>
     </BooksItemEffectWrap>
   );
 };
