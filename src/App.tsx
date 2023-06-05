@@ -1,8 +1,8 @@
-import { useEffect } from "react";
 import { Router } from "./routes";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { BackgroundEffect } from "./styles/global-components";
 
 const theme = createTheme({
   palette: {
@@ -41,6 +41,8 @@ function App() {
         pauseOnHover
         theme="light"
       />
+      {/* background effect */}
+      <BackgroundEffect src={require("./assets/images/bg-effects.png")} />
     </>
   );
 }

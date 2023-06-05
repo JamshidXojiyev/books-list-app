@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "../app/store";
-import { AuthSate } from "../interfaces/auth-interface";
+import { RootState } from "../store";
+import { AuthSate } from "../../interfaces/auth-interface";
 
 const localStorUserInfo: AuthSate = JSON.parse(
   localStorage.getItem("user-info") || "{}"

@@ -1,5 +1,12 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { userInfo, ISignUp } from "../interfaces/auth-interface";
+import { userInfo, ISignUp, AuthSate } from "../../interfaces/auth-interface";
+import { Md5 } from "ts-md5";
+
+type TResponse = {
+  data?: AuthSate | null;
+  isOk?: boolean;
+  message?: string;
+};
 
 export const authApi = createApi({
   reducerPath: "authApi",
@@ -7,7 +14,7 @@ export const authApi = createApi({
     baseUrl: "https://no23.lavina.tech/",
   }),
   endpoints: (builder) => ({
-    signUpUser: builder.mutation({
+    signUpUser: builder.mutation<TResponse, AuthSate>({
       query: (body: ISignUp) => {
         return {
           url: "signup",
@@ -16,14 +23,14 @@ export const authApi = createApi({
         };
       },
     }),
-    userInfo: builder.mutation({
-      query: (headers: userInfo) => {
+    userInfo: builder.mutation<TResponse, userInfo>({
+      query: (headers) => {
         return {
           url: "myself",
           method: "GET",
           headers: {
             Key: headers.key,
-            Sign: headers.sign,
+            Sign: Md5.hashStr(`GET/myself${headers.secret}`),
           },
         };
       },

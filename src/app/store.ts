@@ -1,12 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { authApi } from "../services/authApi";
+import { authApi } from "./services/authApi";
 import { setupListeners } from "@reduxjs/toolkit/query/react";
-import authReducer from "../features/authSlice";
-import { api } from "../services/api";
+import authReducer from "./features/authSlice";
+import searchBooksReducer from "./features/searchBooksSlice";
+import { api } from "./services/api";
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
+    searchBooks: searchBooksReducer,
     [authApi.reducerPath]: authApi.reducer,
     [api.reducerPath]: api.reducer,
   },

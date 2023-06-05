@@ -12,6 +12,11 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { CustomButton } from "../../../styles/custom-styles";
 import { SignInWrap } from "./sign-in.s";
+import { useUserInfoMutation } from "../../../app/services/authApi";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../../app/features/authSlice";
+import { toast } from "react-toastify";
 
 const signInSchema = Yup.object().shape({
   key: Yup.string()
@@ -31,24 +36,40 @@ const signInSchema = Yup.object().shape({
 });
 
 export const SignIn: FC = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [signUpUser, { isLoading, data, error }] = useUserInfoMutation();
+
   const formik = useFormik({
     initialValues: {
       key: "",
       secret: "",
     },
     validationSchema: signInSchema,
-    onSubmit: (values) => {},
+    onSubmit: async (values) => {
+      const resData: any = await signUpUser(values);
+
+      if (resData?.data?.isOk) {
+        await dispatch(setUser({ ...resData.data.data }));
+        navigate("/");
+        toast.success("Good day, the system is ready to work!");
+      } else {
+        toast.error(resData.error.data.message);
+      }
+    },
   });
 
   return (
     <SignInWrap>
       <AuthTitle>Sign in</AuthTitle>
       <SocialBlock>
-        <SocialButton click={() => console.log("hello")}>
+        <SocialButton>
+          <img src={require("../../../assets/images/google.png")} />
           Continue with Google
         </SocialButton>
-        <SocialButton click={() => console.log("hello")}>
-          Continue with Google
+        <SocialButton>
+          <img src={require("../../../assets/images/facebook.png")} />
+          Continue with Facebook
         </SocialButton>
       </SocialBlock>
 
@@ -89,10 +110,10 @@ export const SignIn: FC = () => {
             type="submit"
             color="primary"
             variant="contained"
-            disabled={!formik.dirty}
+            disabled={!(formik.isValid && formik.dirty) || isLoading}
             fullWidth
           >
-            Login
+            Submit
           </CustomButton>
           <AuthLink to="/sign-up">
             Not registered yet? <span>Go to Sign up.</span>

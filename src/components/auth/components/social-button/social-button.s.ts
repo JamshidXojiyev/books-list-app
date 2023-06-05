@@ -21,5 +21,10 @@ export const SocialButtonWrap = styled.button`
     &:hover {
       background: var(--white-500);
     }
+
+    img {
+      width: 24px;
+      height: 24px;
+    }
   }
 `;

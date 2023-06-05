@@ -10,22 +10,36 @@ import { PlusIcon } from "../../../../assets/icons";
 import { useModal } from "../../../../hooks/useModal";
 import { CustomModal } from "../../../ui";
 import { CreateBookForm } from "../create-book-form";
+import { useSelector } from "react-redux";
+import { selectSearchBooks } from "../../../../app/features/searchBooksSlice";
 
-interface IHomeHeaderProps {}
+interface IHomeHeaderProps {
+  globalBooks?: boolean;
+}
 
-export const HomeHeader: FC<IHomeHeaderProps> = (props) => {
+export const HomeHeader: FC<IHomeHeaderProps> = ({ globalBooks }) => {
   const { isShown, toggle } = useModal();
+  const searchBooks = useSelector(selectSearchBooks);
 
   return (
     <HomeHeaderWrap>
       <HeaderTopBlock>
         <HeaderTopTitle>
-          You’ve got <span>7 book</span>
+          {!globalBooks ? (
+            "Your books"
+          ) : (
+            <>
+              The books you searched for
+              <span> {searchBooks.data?.length} books</span>
+            </>
+          )}
         </HeaderTopTitle>
-        <CustomButton color="primary" variant="contained" onClick={toggle}>
-          <PlusIcon />
-          Create a book
-        </CustomButton>
+        {!globalBooks && (
+          <CustomButton color="primary" variant="contained" onClick={toggle}>
+            <PlusIcon />
+            Create a book
+          </CustomButton>
+        )}
       </HeaderTopBlock>
       <HeaderTopDescription>
         Lorem ipsum dolor sit amet consectetur.

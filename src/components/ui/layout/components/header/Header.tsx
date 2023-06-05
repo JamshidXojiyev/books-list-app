@@ -1,6 +1,5 @@
 import { FC } from "react";
 import {
-  BrandImage,
   HeaderLeft,
   HeaderRight,
   HeaderWrap,
@@ -11,17 +10,14 @@ import { SearchInput } from "./components";
 import IconButton from "@mui/material/IconButton";
 import { Bell01Icon } from "../../../../../assets";
 import { Container } from "../../../../../styles/global-components";
+import { BrandSvg } from "../../../../../assets/icons";
 
-// import BrandImageSRC from "../../../../../assets/images/logo-56.png";
-
-interface IHeaderProps {}
-
-export const Header: FC<IHeaderProps> = (props) => {
+export const Header: FC = (props) => {
   return (
     <HeaderWrap>
       <Container>
         <HeaderLeft>
-          {/* <BrandImage src={BrandImageSRC} /> */}
+          <BrandSvg />
           <SearchInput />
         </HeaderLeft>
         <HeaderRight>

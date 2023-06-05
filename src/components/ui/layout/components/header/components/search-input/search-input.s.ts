@@ -25,6 +25,13 @@ export const SearchInputWrap = styled.div<{ target?: string }>`
         stroke: var(--grey-900);
       }
     }
+    & > span {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+    }
   }
 `;
 export const SearchInputComponent = styled.input`

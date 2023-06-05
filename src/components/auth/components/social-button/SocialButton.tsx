@@ -3,7 +3,7 @@ import { SocialButtonWrap } from "./social-button.s";
 
 interface ISocialButtonProps {
   children: ReactNode;
-  click: MouseEventHandler;
+  click?: MouseEventHandler;
 }
 
 export const SocialButton: FC<ISocialButtonProps> = ({ children, click }) => {

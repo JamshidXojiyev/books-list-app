@@ -20,9 +20,6 @@ export const HeaderLeft = styled.div`
   align-items: center;
   gap: 24px;
 `;
-export const BrandImage = styled.img`
-  height: 36px;
-`;
 
 export const HeaderRight = styled.div`
   display: flex;

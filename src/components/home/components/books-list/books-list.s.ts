@@ -37,6 +37,7 @@ export const BookItemBtnBlock = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 2px;
+  z-index: 9;
 `;
 export const BookItemBtn = styled.button<{ action?: string }>`
   && {

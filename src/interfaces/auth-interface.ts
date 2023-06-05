@@ -7,7 +7,7 @@ export interface ISignUp {
 
 export interface userInfo {
   key: string;
-  sign: string;
+  secret: string;
 }
 
 export interface AuthSate {

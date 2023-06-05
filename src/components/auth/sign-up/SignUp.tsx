@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import { SignUpWrap } from "./sign-up.s";
 import {
   AuthBottom,
@@ -12,10 +12,10 @@ import TextField from "@mui/material/TextField";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { CustomButton } from "../../../styles/custom-styles";
-import { useSignUpUserMutation } from "../../../services/authApi";
+import { useSignUpUserMutation } from "../../../app/services/authApi";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setUser } from "../../../features/authSlice";
+import { setUser } from "../../../app/features/authSlice";
 import { toast } from "react-toastify";
 
 const signUpSchema = Yup.object().shape({
@@ -76,11 +76,13 @@ export const SignUp: FC = () => {
     <SignUpWrap>
       <AuthTitle>Sign up</AuthTitle>
       <SocialBlock>
-        <SocialButton click={() => console.log("hello")}>
+        <SocialButton>
+          <img src={require("../../../assets/images/google.png")} />
           Continue with Google
         </SocialButton>
-        <SocialButton click={() => console.log("hello")}>
-          Continue with Google
+        <SocialButton>
+          <img src={require("../../../assets/images/facebook.png")} />
+          Continue with Facebook
         </SocialButton>
       </SocialBlock>
 
@@ -152,7 +154,7 @@ export const SignUp: FC = () => {
             disabled={!(formik.isValid && formik.dirty) || isLoading}
             fullWidth
           >
-            Login
+            Submit
           </CustomButton>
           <AuthLink to="/sign-in">
             Already signed up? <span>Go to Sign in.</span>
